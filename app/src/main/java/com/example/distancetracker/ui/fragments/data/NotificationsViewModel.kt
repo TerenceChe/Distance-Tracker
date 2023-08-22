@@ -1,4 +1,4 @@
-package com.example.distancetracker.ui.notifications
+package com.example.distancetracker.ui.fragments.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
