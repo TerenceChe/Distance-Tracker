@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.distancetracker.databinding.FragmentHomeBinding
+import com.example.distancetracker.ui.adapters.ClubAdapter
 import com.example.distancetracker.ui.fragments.data.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -27,6 +30,14 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+        val data = arrayOf("Text1", "Text2", "Text3")
+        val clubAdapter = ClubAdapter(data)
+
+        val recyclerView: RecyclerView = binding.clubRecyclerView
+        recyclerView.adapter = clubAdapter
+        recyclerView.layoutManager = LinearLayoutManager(activity)
 
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
