@@ -6,8 +6,17 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
 
-    private var _clubNameArray = MutableLiveData<Array<String>>().apply{
-        value = arrayOf("3 wood", "5 iron", "Driver")
+
+    private var clubArray = arrayOf("3 wood", "5 iron", "Driver")
+
+    private var mutableClubArray = MutableLiveData<Array<String>>().apply{
+        value = clubArray
     }
-    val clubNameArray: LiveData<Array<String>> = _clubNameArray
+    val liveClubArray: LiveData<Array<String>> = mutableClubArray
+
+    fun addClub(clubName: String) {
+        clubArray = clubArray.plus(clubName)
+        mutableClubArray.value = clubArray
+    }
+
 }

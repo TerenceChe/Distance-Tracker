@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,14 +26,21 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val recyclerView: RecyclerView = binding.clubRecyclerView
-        homeViewModel.clubNameArray.observe(viewLifecycleOwner) {
+        val addClubBtn: Button = binding.addClubButton
+
+        addClubBtn.setOnClickListener() {
+            // inflate something to get name
+            // save that to the viewmodel
+            homeViewModel.addClub("New Club")
+        }
+
+        homeViewModel.liveClubArray.observe(viewLifecycleOwner) {
             val clubAdapter = ClubAdapter(it)
             recyclerView.adapter = clubAdapter
             recyclerView.layoutManager = LinearLayoutManager(activity)
