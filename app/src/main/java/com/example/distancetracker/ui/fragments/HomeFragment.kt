@@ -1,14 +1,17 @@
 package com.example.distancetracker.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.distancetracker.R
 import com.example.distancetracker.databinding.FragmentHomeBinding
 import com.example.distancetracker.ui.adapters.ClubAdapter
 import com.example.distancetracker.ui.fragments.data.HomeViewModel
@@ -42,6 +45,14 @@ class HomeFragment : Fragment() {
 
         homeViewModel.liveClubArray.observe(viewLifecycleOwner) {
             val clubAdapter = ClubAdapter(it)
+            clubAdapter.setOnClickListener(object : ClubAdapter.OnClickListener {
+                override fun onClick(position: Int) {
+                    val intent = Intent(activity, ClubDistanceFragment::class.java)
+//                    intent.putExtra(NEXT_SCREEN, data)
+                    val clubDistFragment = ClubDistanceFragment()
+                    activity!!.supportFragmentManager.beginTransaction().replace(R.id.container, clubDistFragment, "tag").addToBackStack(null).commit()
+                }
+            })
             recyclerView.adapter = clubAdapter
             recyclerView.layoutManager = LinearLayoutManager(activity)
         }
