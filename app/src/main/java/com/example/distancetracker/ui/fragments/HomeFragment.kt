@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.distancetracker.R
 import com.example.distancetracker.databinding.FragmentHomeBinding
+import com.example.distancetracker.ui.activities.distanceHistoryActivity
 import com.example.distancetracker.ui.adapters.ClubAdapter
 import com.example.distancetracker.ui.fragments.data.HomeViewModel
 
@@ -47,10 +48,9 @@ class HomeFragment : Fragment() {
             val clubAdapter = ClubAdapter(it)
             clubAdapter.setOnClickListener(object : ClubAdapter.OnClickListener {
                 override fun onClick(position: Int) {
-                    val intent = Intent(activity, ClubDistanceFragment::class.java)
+                    val intent = Intent(activity, distanceHistoryActivity::class.java)
 //                    intent.putExtra(NEXT_SCREEN, data)
-                    val clubDistFragment = ClubDistanceFragment()
-                    activity!!.supportFragmentManager.beginTransaction().replace(R.id.container, clubDistFragment, "tag").addToBackStack(null).commit()
+                    startActivity(intent)
                 }
             })
             recyclerView.adapter = clubAdapter
